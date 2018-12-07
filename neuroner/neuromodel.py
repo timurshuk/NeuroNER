@@ -559,8 +559,9 @@ class NeuroNER(object):
                             dataset_brat_folders[dataset_type])
                     else:
                         # Populate conll file based on brat files
-                        brat_to_conll.brat_to_conll(dataset_brat_folders[dataset_type], 
-                            dataset_filepath_for_tokenizer, parameters['tokenizer'], parameters['spacylanguage'])
+                        brat_to_conll.brat_to_conll(
+                            dataset_brat_folders[dataset_type],
+                            dataset_filepath_for_tokenizer)
                     dataset_filepaths[dataset_type] = dataset_filepath_for_tokenizer
 
                 # Brat text files do not exist
@@ -809,7 +810,7 @@ class NeuroNER(object):
         annotation_filepath = os.path.join(self.stats_graph_folder, 'brat', 
             'deploy', '{0}.ann'.format(utils.get_basename_without_extension(dataset_brat_deploy_filepath)))
         text2, entities = brat_to_conll.get_entities_from_brat(text_filepath, 
-            annotation_filepath, verbose=True)
+            annotation_filepath, verbose=False)
         assert(text == text2)
         return entities
 

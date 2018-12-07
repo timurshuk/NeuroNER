@@ -92,6 +92,7 @@ def check_compatibility_between_conll_and_brat_text(conll_filepath, brat_folder)
 
         # check that the token text matches the original
         if token['text'] != text[token['start']:token['end']]:
+            print(str(line[1]))
             print("Warning: conll and brat text do not match.")
             print("\tCONLL: {0}".format(token['text']))
             print("\tBRAT : {0}".format(text[token['start']:token['end']]))
@@ -193,6 +194,7 @@ def conll_to_brat(conll_input_filepath, conll_output_filepath, brat_original_fol
         token['end'] = int(line[3])
         # check that the token text matches the original
         if token['text'] != text[token['start']:token['end']].replace(' ', '-'):
+            print(str(line[1]))
             print("Warning: conll and brat text do not match.")
             print("\tCONLL: {0}".format(token['text']))
             print("\tBRAT : {0}".format(text[token['start']:token['end']]))
