@@ -64,6 +64,7 @@ class Dataset(object):
 
 
     def _convert_to_indices(self, dataset_types):
+        random.seed(123)
         tokens = self.tokens
         labels = self.labels
         token_to_index = self.token_to_index
