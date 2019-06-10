@@ -11,6 +11,7 @@ import token
 
 from neuroner import utils
 from neuroner import utils_nlp
+import numpy as np
 
 
 class Dataset(object):
@@ -203,6 +204,12 @@ class Dataset(object):
                 token_count['test'].keys()) + list(token_count['deploy'].keys()):
             token_count['all'][token] = token_count['train'][token] + token_count['valid'][token] + token_count['test'][
                 token] + token_count['deploy'][token]
+
+        # If token not in pretrained embeddings, then we will initialize it with zeros
+        for token in token_count['all']:
+            if token not in token_to_vector:
+                if token.lower() not in token_to_vector and token.lower().capitalize() not in token_to_vector:
+                    token_to_vector[token] = np.zeros(parameters['token_embedding_dimension'])
 
         if parameters['load_all_pretrained_token_embeddings']:
             for token in token_to_vector:

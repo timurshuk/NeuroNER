@@ -61,6 +61,7 @@ setup(
         'scikit-learn>=0.20.2',
         'scipy>=1.2.0',
         'spacy>=2.0.18',
+        'numpy==1.16.0'
         ],
 
     # allow user to select flavour of TensorFlow 
