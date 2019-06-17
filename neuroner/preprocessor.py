@@ -1,5 +1,14 @@
 import re,random
 
+dirt_regexp = re.compile('(\n[^\S\n]*.[^\S\n]*)+\n')
+repeating_new_lines_regexp = re.compile('\n{3,}')
+repeating_spaces_regexp = re.compile('[^\S\n]{3,}')
+tags_regexp = re.compile('\[(image|bookmark): [^\]\[]*\]')
+repeating_punctuation_regexp = re.compile(
+    '(([^\w\s]|_)([^\w]|_)+([^\w\s]|_))'
+)
+
+
 class Preprocessor:
     
     def check_none(self,value):
@@ -13,8 +22,13 @@ class Preprocessor:
         else: return word
         
     def preprocess(self, text):
-        split_by_digits = [x for x in re.split('(\d*)',text) if x.strip()!='']
-        split_by_letter = [x for x in re.split('(\W)',' '.join(split_by_digits)) if x.strip()!='']
+        text = dirt_regexp.sub('\n', text)
+        text = repeating_new_lines_regexp.sub('\n\n', text)
+        text = repeating_spaces_regexp.sub('  ', text)
+        text = tags_regexp.sub('', text)
+        text = repeating_punctuation_regexp.sub('\\2\\4', text)
+        split_by_digits = [x for x in re.split('(\d+)', text) if x.strip() != '']
+        split_by_letter = [x.strip() for x in re.split('(\W)', ' '.join(split_by_digits)) if x.strip() != '']
         return split_by_letter
 
     def get_tags(self,field,entity,tag):
