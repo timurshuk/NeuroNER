@@ -8,7 +8,7 @@ from pycorenlp import StanfordCoreNLP
 import spacy
 
 from neuroner import utils_nlp
-from preprocessor import *
+from neuroner.preprocessor import *
 
 def get_sentences_and_tokens_custom(text, entities):
     """ use tokenizer that will take al symbols apart from the words
