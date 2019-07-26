@@ -235,7 +235,7 @@ class Dataset(object):
 
         token_count['all'] = utils.order_dictionary(token_count['all'], 'value_key', reverse = True)
         label_count['all'] = utils.order_dictionary(label_count['all'], 'key', reverse = False)
-        character_count['all'] = utils.order_dictionary(character_count['all'], 'value', reverse = True)
+        character_count['all'] = utils.order_dictionary(character_count['all'], 'key', reverse = True)
         if self.verbose: 
             print('character_count[\'all\']: {0}'.format(character_count['all']))
 
